@@ -2,6 +2,12 @@
 <resources>
     <string name="app_name">Political Preparedness</string>
 
-    <!-- TODO: Add necessary string values -->
+    <!-- Launch Screen -->
+    <string name="upcomingButton">Upcoming Elections</string>
+    <string name="representativeButton">Find My Representations</string>
+
+    <!-- Upcoming  Elections Screen -->
+    <string name="upcoming_election_header">Upcoming Elections</string>
+    <string name="saved_election_header">Saved Elections</string>
 
 </resources>
