@@ -9,5 +9,14 @@
     <!-- Upcoming  Elections Screen -->
     <string name="upcoming_election_header">Upcoming Elections</string>
     <string name="saved_election_header">Saved Elections</string>
+    <string name="upcoming_election_error">Can\'t not retrieve upcoming election</string>
+
+    <!-- Voter Information Screen -->
+    <string name="election_information">Election Information</string>
+    <string name="follow_button">Follow Election</string>
+    <string name="unfollow_button">Unfollow Election</string>
+    <string name="voting_locations">Voting Locations</string>
+    <string name="ballot_information">Ballot Information</string>
+    <string name="voter_information_error">Can\'t not retrieve voter information detail</string>
 
 </resources>

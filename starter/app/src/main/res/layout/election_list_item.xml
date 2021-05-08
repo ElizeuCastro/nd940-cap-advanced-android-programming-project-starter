@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/tv_date"
-            style="@style/TextViewDateStyle"
+            style="@style/TextViewCommonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:dateText="@{election.electionDay}" />

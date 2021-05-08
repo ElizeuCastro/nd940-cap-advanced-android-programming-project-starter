@@ -12,7 +12,10 @@ import com.example.android.politicalpreparedness.network.models.Election
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
-class ElectionListAdapter(private val header: String) : ListAdapter<DataItem, RecyclerView.ViewHolder>(ElectionDiffCallback()) {
+class ElectionListAdapter(
+        private val header: String,
+        private val onClickItem: (election: Election) -> Unit
+) : ListAdapter<DataItem, RecyclerView.ViewHolder>(ElectionDiffCallback()) {
 
     fun updateData(list: List<Election>?) {
         val items = when (list) {
@@ -36,7 +39,7 @@ class ElectionListAdapter(private val header: String) : ListAdapter<DataItem, Re
             }
             is ItemViewHolder -> {
                 val nightItem = getItem(position) as DataItem.Item
-                holder.bind(nightItem.election)
+                holder.bind(nightItem.election, onClickItem)
             }
         }
     }
@@ -65,9 +68,10 @@ class ElectionListAdapter(private val header: String) : ListAdapter<DataItem, Re
     }
 
     class ItemViewHolder(private val binding: ElectionListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(election: Election) {
+        fun bind(election: Election, onClickItem: (election: Election) -> Unit) {
             binding.election = election
             binding.executePendingBindings()
+            binding.root.setOnClickListener { onClickItem(election) }
         }
 
         companion object {
