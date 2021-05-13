@@ -16,9 +16,7 @@ class ElectionsViewModel(private val repository: ElectionDataSource) : ViewModel
     val upcomingElections: LiveData<List<Election>>
         get() = _upcomingElections
 
-    private val _savedElections = MutableLiveData<List<Election>>()
-    val savedElections: LiveData<List<Election>>
-        get() = _savedElections
+    val savedElections = repository.getSavedElections()
 
     private val _navigateToVoterInfo = MutableLiveData<Election?>()
     val navigateToVoterInfo: LiveData<Election?>
@@ -34,7 +32,6 @@ class ElectionsViewModel(private val repository: ElectionDataSource) : ViewModel
 
     init {
         fetchUpcomingElections()
-        fetchSavedElections()
     }
 
     private fun fetchUpcomingElections() {
@@ -50,19 +47,6 @@ class ElectionsViewModel(private val repository: ElectionDataSource) : ViewModel
                 is Result.Error -> {
                     _upcomingElections.value = emptyList()
                     _showUpcomingElectionError.value = true
-                }
-            }
-        }
-    }
-
-    private fun fetchSavedElections() {
-        viewModelScope.launch {
-            when (val result = repository.getSavedElections()) {
-                is Result.Success<*> -> {
-                    _savedElections.value = (result.data as List<Election>)
-                }
-                is Result.Error -> {
-                    _savedElections.value = emptyList()
                 }
             }
         }

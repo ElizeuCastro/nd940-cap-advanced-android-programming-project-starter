@@ -19,4 +19,19 @@
     <string name="ballot_information">Ballot Information</string>
     <string name="voter_information_error">Can\'t not retrieve voter information detail</string>
 
+    <!-- Representative Screen -->
+    <string name="search_title">Representative Search</string>
+    <string name="my_representatives">My Representatives</string>
+    <string name="find_my_representatives_button">Find My Representatives</string>
+    <string name="use_my_location_button">Use My Location</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="city">City</string>
+    <string name="zip">Zip</string>
+    <string name="ic_profile_description">Profile image of representation</string>
+    <string name="ic_web_site_description">Web site link</string>
+    <string name="ic_facebook_description">Facebook link</string>
+    <string name="ic_twitter_description">Twitter link</string>
+
+
 </resources>

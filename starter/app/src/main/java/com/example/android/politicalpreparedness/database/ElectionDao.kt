@@ -7,11 +7,11 @@ import com.example.android.politicalpreparedness.network.models.Election
 @Dao
 interface ElectionDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(election: Election)
 
     @Query("select * from election_table")
-    suspend fun getSavedElections() : List<Election>
+    fun getSavedElections() : LiveData<List<Election>>
 
     @Query("select * from election_table where id = :id")
     suspend fun get(id: Int): Election?

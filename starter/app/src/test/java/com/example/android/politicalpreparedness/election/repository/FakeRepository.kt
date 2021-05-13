@@ -1,9 +1,12 @@
 package com.example.android.politicalpreparedness.election.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.android.politicalpreparedness.election.dto.VoterInfoDTO
 import com.example.android.politicalpreparedness.network.Result
 import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.network.models.ElectionResponse
+import com.example.android.politicalpreparedness.network.models.RepresentativeResponse
 
 class FakeRepository : ElectionDataSource {
 
@@ -26,16 +29,14 @@ class FakeRepository : ElectionDataSource {
         }
     }
 
-    override suspend fun getSavedElections(): Result<List<Election>> {
-        return if (shouldReturnError) {
-            return Result.Error("Exception getReminder")
-        } else {
-            Result.Success(savedElections)
-        }
+    override fun getSavedElections(): LiveData<List<Election>> {
+        val observableTasks = MutableLiveData<List<Election>>()
+        observableTasks.value = savedElections
+        return observableTasks
     }
 
     override suspend fun getElection(id: Int): Election? {
-        return savedElections.find { it.id == id}
+        return savedElections.find { it.id == id }
     }
 
     override suspend fun insert(election: Election) {
@@ -52,6 +53,10 @@ class FakeRepository : ElectionDataSource {
         } else {
             Result.Success(voterInfoDTO)
         }
+    }
+
+    override suspend fun getRepresentatives(address: String): Result<RepresentativeResponse> {
+        TODO("Not yet implemented")
     }
 
 }

@@ -7,6 +7,7 @@ import com.example.android.politicalpreparedness.network.CivicsApiService
 import com.example.android.politicalpreparedness.network.Result
 import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.network.models.ElectionResponse
+import com.example.android.politicalpreparedness.network.models.RepresentativeResponse
 import com.example.android.politicalpreparedness.network.models.asVoterInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -15,10 +16,10 @@ import kotlinx.coroutines.withContext
 class ElectionRepository(
         private val service: CivicsApiService,
         private val dao: ElectionDao,
-        private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+        private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ElectionDataSource {
 
-    override suspend fun getUpcomingElections(): Result<ElectionResponse> = withContext(ioDispatcher) {
+    override suspend fun getUpcomingElections(): Result<ElectionResponse> = withContext(dispatcher) {
         return@withContext try {
             Result.Success(service.getUpcomingElections())
         } catch (ex: Exception) {
@@ -26,26 +27,20 @@ class ElectionRepository(
         }
     }
 
-    override suspend fun getSavedElections(): Result<List<Election>> = withContext(ioDispatcher) {
-        return@withContext try {
-            Result.Success(dao.getSavedElections())
-        } catch (ex: Exception) {
-            Result.Error(ex.localizedMessage)
-        }
-    }
+    override fun getSavedElections(): LiveData<List<Election>> = dao.getSavedElections()
 
-    override suspend fun getElection(id: Int): Election? = withContext(ioDispatcher) {
+    override suspend fun getElection(id: Int): Election? = withContext(dispatcher) {
         dao.get(id)
     }
 
     override suspend fun insert(election: Election) {
-        withContext(ioDispatcher) {
+        withContext(dispatcher) {
             dao.insert(election)
         }
     }
 
     override suspend fun delete(election: Election) {
-        withContext(ioDispatcher) {
+        withContext(dispatcher) {
             dao.delete(election)
         }
     }
@@ -53,6 +48,14 @@ class ElectionRepository(
     override suspend fun getVoterInfo(address: String, electionId: Int): Result<VoterInfoDTO> {
         return try {
             Result.Success(service.getVoterInfo(address, electionId).asVoterInfo())
+        } catch (ex: Exception) {
+            Result.Error(ex.localizedMessage)
+        }
+    }
+
+    override suspend fun getRepresentatives(address: String): Result<RepresentativeResponse> = withContext(dispatcher) {
+        return@withContext try {
+            Result.Success(service.getRepresentatives(address))
         } catch (ex: Exception) {
             Result.Error(ex.localizedMessage)
         }

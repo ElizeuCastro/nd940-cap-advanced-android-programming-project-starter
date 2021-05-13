@@ -26,6 +26,14 @@ android {
     androidExtensions {
         experimental = true
     }
+    dataBinding {
+        enabled = true
+        enabledForTests = true
+    }
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

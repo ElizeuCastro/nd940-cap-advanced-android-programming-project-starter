@@ -151,7 +151,7 @@ class VoterInfoViewModelTest {
                 Division(1.toString(), "us", "os")
         ))
 
-        // When init view model toggle action
+        // When toggle action
         viewModel.toggle(election)
 
         // Then isFollow is true and election was saved
@@ -177,7 +177,7 @@ class VoterInfoViewModelTest {
                 Division(1.toString(), "us", "os")
         ))
 
-        // When init view model toggle action
+        // When toggle action
         viewModel.toggle(election)
 
         // Then isFollow is false and election was removed
