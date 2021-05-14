@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/representativeFragment"
-        android:name="com.example.android.politicalpreparedness.representative.RepresentativeFragment"
+        android:name="com.example.android.politicalpreparedness.representative.ui.RepresentativeFragment"
         android:label="fragment_representative"
         tools:layout="@layout/fragment_representative"></fragment>
     <fragment

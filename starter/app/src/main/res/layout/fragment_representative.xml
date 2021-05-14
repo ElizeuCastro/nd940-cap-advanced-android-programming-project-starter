@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.android.politicalpreparedness.representative.RepresentativeViewModel" />
+            type="com.example.android.politicalpreparedness.representative.ui.RepresentativeViewModel" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout

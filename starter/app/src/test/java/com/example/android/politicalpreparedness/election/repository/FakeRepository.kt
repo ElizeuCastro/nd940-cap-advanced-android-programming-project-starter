@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android.politicalpreparedness.election.dto.VoterInfoDTO
 import com.example.android.politicalpreparedness.network.Result
-import com.example.android.politicalpreparedness.network.models.Election
-import com.example.android.politicalpreparedness.network.models.ElectionResponse
-import com.example.android.politicalpreparedness.network.models.RepresentativeResponse
+import com.example.android.politicalpreparedness.network.models.*
 
 class FakeRepository : ElectionDataSource {
 
@@ -14,6 +12,9 @@ class FakeRepository : ElectionDataSource {
     var elections = mutableListOf<Election>()
     var savedElections = mutableListOf<Election>()
     var voterInfoDTO = VoterInfoDTO()
+    var representativeResponse = RepresentativeResponse(
+            offices = emptyList(), officials = emptyList()
+    )
 
     fun setReturnError(value: Boolean) {
         shouldReturnError = value
@@ -21,7 +22,7 @@ class FakeRepository : ElectionDataSource {
 
     override suspend fun getUpcomingElections(): Result<ElectionResponse> {
         return if (shouldReturnError) {
-            return Result.Error("Exception getReminder")
+            return Result.Error("Exception getUpcomingElections")
         } else {
             Result.Success(ElectionResponse(
                     "elections", elections
@@ -56,7 +57,11 @@ class FakeRepository : ElectionDataSource {
     }
 
     override suspend fun getRepresentatives(address: String): Result<RepresentativeResponse> {
-        TODO("Not yet implemented")
+        return if (shouldReturnError) {
+            return Result.Error("Exception getReminder")
+        } else {
+            Result.Success(representativeResponse)
+        }
     }
 
 }
