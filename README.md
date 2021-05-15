@@ -9,15 +9,13 @@ Political Preparedness.
 
 You can clone this project and run your local machine or you can download the Apk for test.
 
-### Dependencies
+### Components and Architecture
 
-```
 This Project was built by using Android Jetpack components and following best practices and recommended architecture.
-```
 
 ## Project Instructions
 
-The Apk binary could be found in the folder /apk
+The Apk binary could be found in the folder **/starter/apk/politicalpreparedness.apk**
 
 ## Screens
 
