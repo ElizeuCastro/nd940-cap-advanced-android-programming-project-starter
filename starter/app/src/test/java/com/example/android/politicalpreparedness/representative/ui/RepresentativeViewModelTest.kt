@@ -178,4 +178,31 @@ class RepresentativeViewModelTest {
         assertThat(viewModel.zip.value, `is`("94043"))
     }
 
+    @Test
+    fun findMyRepresentativesClick_hideKeyboard() {
+
+        // Given some address
+        viewModel.addressLine1.value = "Amphitheatre Parkway"
+        viewModel.addressLine2.value = "1600"
+        viewModel.city.value = "Mountain View"
+        viewModel.state.value = "California"
+        viewModel.zip.value = "94043"
+
+        // When find representatives
+        viewModel.findMyRepresentativesClick()
+
+        // Then - show loading
+        assertThat(viewModel.hideKeyboard.getOrAwaitValue(), (`is`(true)))
+
+    }
+
+    @Test
+    fun hideKeyboardComplete() {
+        // When click user my location
+        viewModel.hideKeyboardComplete()
+
+        // Then find my location should be complete
+        assertThat(viewModel.hideKeyboard.getOrAwaitValue(), `is`(false))
+    }
+
 }

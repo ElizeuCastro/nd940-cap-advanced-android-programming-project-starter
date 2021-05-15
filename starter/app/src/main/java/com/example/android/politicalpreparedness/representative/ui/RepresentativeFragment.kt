@@ -81,6 +81,13 @@ class RepresentativeFragment : Fragment() {
                 viewModel.useMyLocationComplete()
             }
         })
+
+        viewModel.hideKeyboard.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                hideKeyboard()
+                viewModel.hideKeyboardComplete()
+            }
+        })
     }
 
     private fun retrieveMyLocation() {

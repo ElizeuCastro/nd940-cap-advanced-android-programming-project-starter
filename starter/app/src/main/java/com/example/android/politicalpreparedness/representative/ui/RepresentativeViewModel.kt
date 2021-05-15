@@ -30,8 +30,13 @@ class RepresentativeViewModel(private val repository: ElectionDataSource) : View
     val showLoading: LiveData<Boolean>
         get() = _showLoading
 
+    private val _hideKeyboard = MutableLiveData<Boolean>()
+    val hideKeyboard: LiveData<Boolean>
+        get() = _hideKeyboard
+
     fun findMyRepresentativesClick() {
         _showLoading.value = true
+        _hideKeyboard.value = true
         viewModelScope.launch {
             val result = repository.getRepresentatives(getAddress())
             _showLoading.value = false
@@ -77,6 +82,10 @@ class RepresentativeViewModel(private val repository: ElectionDataSource) : View
         city.value = address.city
         state.value = address.state
         zip.value = address.zip
+    }
+
+    fun hideKeyboardComplete() {
+        _hideKeyboard.value = false
     }
 
 }
