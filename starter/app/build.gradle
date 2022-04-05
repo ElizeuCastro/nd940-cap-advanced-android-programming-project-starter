@@ -21,10 +21,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "CIVIC_INFORMATION_API_KEY", '"MY_RELEASE_API_KEY"')
+            buildConfigField("String", "CIVIC_INFORMATION_API_KEY", "\"${System.env.MY_RELEASE_API_KEY}\"")
         }
         debug {
-            buildConfigField("String", "CIVIC_INFORMATION_API_KEY", '"MY_DEBUG_API_KEY"')
+            buildConfigField("String", "CIVIC_INFORMATION_API_KEY", "\"${System.env.MY_DEBUG_API_KEY}\"")
         }
     }
     androidExtensions {
